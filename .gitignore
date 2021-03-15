@@ -1,0 +1,6 @@
+#odoo backup database
+*.zip
+# compiled python files
+__pycache__/
+*.py[cod]
+*$py.class

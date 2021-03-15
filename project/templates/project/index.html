@@ -1,0 +1,18 @@
+{% extends "project/_base.html" %}
+{% block title %} Liste des projets {% endblock title %}
+{% block content %}
+{% if projects %}
+<ul class="list-group">
+    {% for project in projects %}
+    <li class="list-group-item">
+    <span> Projet : {{project.name}} - {{ project.tasksproject.all|length }} tâche{{project.tasksproject.all|length|pluralize}}  </span>
+    </li> 
+    {% endfor %}
+</ul>
+{% else %}
+    <div class="container m-4">
+        <alert class="alert alert-warning">No Projects</alert>
+    </div>
+{% endif %}
+{% include 'project/_create_project_modal.html' %}
+{% endblock content %}

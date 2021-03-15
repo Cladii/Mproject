@@ -1,0 +1,28 @@
+{% extends "task/_base.html" %}
+{% block title %} Liste des tâches {% endblock title %}
+{% block content %}
+{% if tasks %}
+<ul class="list-group">
+    {% for task in tasks %}
+    <li class="list-group-item">
+    <span> Projet : {{task.project.name}} - </span>
+    {{ task.title }}
+        {% if task.assignee %}
+            <span>(assignée à {{ task.assignee.first_name }})</span>
+        {% else %}
+            <span>(non assignée)</span>
+        {% endif %}
+        <form action="{% url 'task:delete' task.id %}" method="post" style="display: contents">
+        <button class="close" type="submit"><i class="fa fa-trash"></i></button>
+    {% csrf_token %}
+    </form>
+    </li> 
+    {% endfor %}
+</ul>
+{% else %}
+    <div class="container m-4">
+        <alert class="alert alert-warning">No Tasks</alert>
+    </div>
+{% endif %}
+{% include 'task/_create_task_modal.html' %}
+{% endblock content %}
